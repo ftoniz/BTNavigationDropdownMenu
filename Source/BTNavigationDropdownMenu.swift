@@ -375,6 +375,15 @@ public class BTNavigationDropdownMenu: UIView {
         self.arrowTintColor = self.configuration.arrowTintColor
     }
     
+    open func setSelected(index: Int) {
+        self.tableView.selectedIndexPath = index
+        self.tableView.reloadData()
+        
+        if self.shouldChangeTitleText! {
+            self.setMenuTitle("\(self.tableView.items[index])")
+        }
+    }
+    
     func showMenu() {
         self.menuWrapper.frame.origin.y = self.navigationController!.navigationBar.frame.maxY
         
