@@ -384,6 +384,7 @@ public class BTNavigationDropdownMenu: UIView {
         }
     }
     
+    
     func showMenu() {
         self.menuWrapper.frame.origin.y = self.navigationController!.navigationBar.frame.maxY
         
