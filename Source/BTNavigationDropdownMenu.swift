@@ -40,12 +40,14 @@ open class BTNavigationDropdownMenu: UIView {
     public struct MenuItem {
         var title:String
         var image:UIImage?
+        var rightItemText:String?
+
         
-        public  init(title: String, image:UIImage?) {
+        public  init(title: String, image:UIImage?, rightItemText:String?) {
             self.title = title
             self.image = image
+            self.rightItemText = rightItemText
         }
-        
     }
     
     public enum BackgroundViewMode {
@@ -347,8 +349,8 @@ open class BTNavigationDropdownMenu: UIView {
         let titleSize = (longestTitle as NSString).size(withAttributes: [NSAttributedStringKey.font:self.configuration.navigationBarTitleFont])
         
         // Set frame
-        let frame = CGRect(x: 0, y: 0, width: titleSize.width + (self.configuration.arrowPadding + self.configuration.arrowImage.size.width)*2, height: self.navigationController!.navigationBar.frame.height)
-        
+        let frame = CGRect(x: -20, y: 0, width: (titleSize.width + self.configuration.arrowImage.size.width), height: self.navigationController!.navigationBar.frame.height)
+
         super.init(frame:frame)
         
         self.isShown = false
@@ -619,7 +621,7 @@ open class BTNavigationDropdownMenu: UIView {
         self.tableView.reloadData()
 
         if self.shouldChangeTitleText! {
-            self.setMenuTitle("\(self.tableView.items[index])")
+            self.setMenuTitle("\(self.tableView.items[index].title)")
         }
     }
 }
@@ -771,11 +773,10 @@ class BTTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
             let imageOriginX:CGFloat
             
             if self.configuration.cellTextLabelAlignment == .left     {
-                imageOriginX = cell.textLabel!.frame.origin.x - self.configuration.cellLabelImageDistance - self.configuration.cellImageSize
+                imageOriginX = cell.textLabel!.frame.origin.x + self.configuration.cellLabelImageDistance + self.configuration.cellImageSize + 20
             } else {
-                imageOriginX = cell.textLabel!.frame.origin.x  + cell.textLabel!.frame.size.width + self.configuration.cellLabelImageDistance
+                imageOriginX = cell.textLabel!.frame.origin.x  - cell.textLabel!.frame.size.width - self.configuration.cellLabelImageDistance
             }
-            
             
             cell.imageView?.frame = CGRect(x: imageOriginX, y: (self.configuration.cellHeight - self.configuration.cellImageSize) / 2, width: self.configuration.cellImageSize, height: self.configuration.cellImageSize)
             cell.imageView?.clipsToBounds = true
