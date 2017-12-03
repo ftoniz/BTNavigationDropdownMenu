@@ -865,7 +865,7 @@ class BTTableViewCell: UITableViewCell {
         }
         self.checkmarkIcon.isHidden = true
         
-        timeremainLabel = UILabel(frame: CGRect(x: cellContentFrame.width - checkmarkIconWidth - 100, y: (cellContentFrame.height - 30)/2, width: 100, height: 21))
+        timeremainLabel = UILabel(frame: CGRect(x: cellContentFrame.width - checkmarkIconWidth - 90, y: (cellContentFrame.height - 30)/2 + 5, width: 100, height: 21))
         timeremainLabel.textAlignment = .right
         timeremainLabel.textColor = self.configuration.cellTextLabelColor
         timeremainLabel.font = UIFont(name: "Circular-Book", size: 16)
