@@ -790,8 +790,7 @@ class BTTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
             }
             
         }
-        
-        
+        cell.timeremainLabel?.text = self.items[indexPath.row].rightItemText
         
         return cell
     }
@@ -829,6 +828,7 @@ class BTTableViewCell: UITableViewCell {
     var checkmarkIcon: UIImageView!
     var cellContentFrame: CGRect!
     var configuration: BTConfiguration!
+    var timeremainLabel: UILabel!
     
     
     init(style: UITableViewCellStyle, reuseIdentifier: String?, configuration: BTConfiguration) {
@@ -858,12 +858,19 @@ class BTTableViewCell: UITableViewCell {
         if self.textLabel!.textAlignment == .center {
             self.checkmarkIcon = UIImageView(frame: CGRect(x: cellContentFrame.width - checkmarkIconWidth, y: (cellContentFrame.height - 30)/2, width: 30, height: 30))
         } else if self.textLabel!.textAlignment == .left {
-            self.checkmarkIcon = UIImageView(frame: CGRect(x: cellContentFrame.width - checkmarkIconWidth, y: (cellContentFrame.height - 30)/2, width: 30, height: 30))
+            self.checkmarkIcon = UIImageView(frame: CGRect(x: cellContentFrame.width - checkmarkIconWidth + 15, y: (cellContentFrame.height - 20)/2, width: 20, height: 20))
+            
         } else {// right
             self.checkmarkIcon = UIImageView(frame: CGRect(x: self.configuration.cellLabelImageDistance + checkmarkIconWidth, y: (cellContentFrame.height - 30)/2, width: 30, height: 30))
         }
         self.checkmarkIcon.isHidden = true
         
+        timeremainLabel = UILabel(frame: CGRect(x: cellContentFrame.width - checkmarkIconWidth - 100, y: (cellContentFrame.height - 30)/2, width: 100, height: 21))
+        timeremainLabel.textAlignment = .right
+        timeremainLabel.textColor = self.configuration.cellTextLabelColor
+        timeremainLabel.font = UIFont(name: "Circular-Book", size: 16)
+        self.contentView.addSubview(timeremainLabel)
+
         
         if let _ = self.configuration.cellTintColor {
             self.checkmarkIcon.image = self.configuration.checkMarkImage.withRenderingMode(.alwaysTemplate)
