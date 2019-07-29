@@ -505,7 +505,11 @@ open class BTNavigationDropdownMenu: UIView {
     }
     
     func showMenu() {
-        self.menuWrapper.frame.origin.y = self.navigationController!.navigationBar.frame.maxY
+      guard
+        let nav = self.navigationController
+        else {return}
+      
+        self.menuWrapper.frame.origin.y = nav.navigationBar.frame.maxY
         
         self.isShown = true
         
